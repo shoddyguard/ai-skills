@@ -1,0 +1,17 @@
+policy:
+  min_age_days: 30
+  scanners:
+    required:
+      - snyk
+      - socket
+      - agent-trust-hub
+    max_risk: low
+    allow_missing_report: false
+  capabilities:
+    block_on_new: true
+
+skills:
+  - name: thermo-nuclear-code-quality-review
+    repo: cursor/plugins
+    path: cursor-team-kit/skills/thermo-nuclear-code-quality-review
+    ref: main

@@ -1,0 +1,88 @@
+name: Update skill pins
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Re-resolve every skill even if the pinned commit is unchanged
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-skills
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --require-hashes -r .build/requirements.txt
+
+      - run: python -m unittest discover -s .build -p "test_*.py"
+
+      - name: Resolve pins
+        id: resolve
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python .build/update_lock.py \
+            ${{ inputs.force && '--force' || '' }} \
+            --summary summary.json 2>&1 | tee resolve.log
+          echo "changed=$(jq -r .changed summary.json)" >> "$GITHUB_OUTPUT"
+          echo "held-count=$(jq -r '.held | length' summary.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Verify the resulting lockfile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .build/verify_lock.py
+
+      - name: Summarise the run
+        if: always()
+        run: |
+          {
+            echo "### Skill pin resolution"
+            echo
+            echo '```'
+            cat resolve.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Open pull request
+        if: steps.resolve.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: chore/update-skill-pins
+          title: "chore: update external skill pins"
+          commit-message: "chore: update external skill pins"
+          delete-branch: true
+          add-paths: skills.lock.json
+          body: |
+            Automated pin refresh. Every advanced pin cleared the age gate, the
+            published scanner verdicts, and the capability diff. Candidates that
+            failed a gate are recorded under `held` in the lockfile instead.
+
+            Review the upstream diff for each bumped skill before merging. The
+            `contentDigest` recorded here is what `verify_lock.py` holds upstream
+            to afterwards, so merging is the point at which you accept the
+            content.
+
+            ```
+            ${{ steps.resolve.outputs.held-count }} candidate(s) held by policy
+            ```
+
+      - name: Flag held candidates
+        if: steps.resolve.outputs.held-count != '0'
+        run: |
+          echo "::warning::${{ steps.resolve.outputs.held-count }} skill update(s) held by policy, see the run summary"
