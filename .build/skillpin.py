@@ -99,12 +99,63 @@ class Policy:
 
 
 @dataclass
+class ScannerOverride:
+    """A per-skill relaxation of one scanner's verdict or risk ceiling."""
+
+    reason: str
+    max_risk: str | None = None
+    verdicts: list[str] = field(default_factory=list)
+
+    @classmethod
+    def from_dict(cls, scanner: str, raw: object) -> "ScannerOverride":
+        if not isinstance(raw, dict):
+            raise SkillPinError(f"override for {scanner!r} must be a mapping, got {raw!r}")
+        unknown = sorted(set(raw) - {"reason", "max_risk", "verdicts"})
+        if unknown:
+            raise SkillPinError(f"override for {scanner!r} has unknown keys {unknown}")
+
+        reason = str(raw.get("reason") or "").strip()
+        if not reason:
+            raise SkillPinError(f"override for {scanner!r} needs a non-empty reason")
+
+        max_risk = raw.get("max_risk")
+        if max_risk is not None:
+            max_risk = str(max_risk).lower()
+            if max_risk not in RISK_ORDER:
+                raise SkillPinError(
+                    f"override for {scanner!r}: max_risk must be one of {RISK_ORDER}, got {max_risk!r}"
+                )
+
+        raw_verdicts = raw.get("verdicts") or []
+        if isinstance(raw_verdicts, str):
+            raw_verdicts = [raw_verdicts]
+        if not isinstance(raw_verdicts, list):
+            raise SkillPinError(f"override for {scanner!r}: verdicts must be a list")
+        verdicts = sorted({str(v).strip().lower() for v in raw_verdicts if str(v).strip()})
+
+        if max_risk is None and not verdicts:
+            raise SkillPinError(
+                f"override for {scanner!r} relaxes nothing, set max_risk and/or verdicts"
+            )
+        return cls(reason=reason, max_risk=max_risk, verdicts=verdicts)
+
+    def to_dict(self) -> dict:
+        record: dict = {"reason": self.reason}
+        if self.max_risk is not None:
+            record["max_risk"] = self.max_risk
+        if self.verdicts:
+            record["verdicts"] = list(self.verdicts)
+        return record
+
+
+@dataclass
 class SkillSpec:
     name: str
     repo: str
     path: str
     ref: str = "main"
     slug: str | None = None
+    overrides: dict[str, ScannerOverride] = field(default_factory=dict)
 
     @property
     def key(self) -> str:
@@ -116,6 +167,27 @@ class SkillSpec:
             return self.slug
         leaf = self.path.rstrip("/").split("/")[-1]
         return f"{self.repo}/{leaf}"
+
+    @property
+    def override_record(self) -> dict:
+        return {name: o.to_dict() for name, o in sorted(self.overrides.items())}
+
+
+def parse_overrides(raw: object, policy: Policy, context: str) -> dict[str, ScannerOverride]:
+    if not raw:
+        return {}
+    if not isinstance(raw, dict):
+        raise SkillPinError(f"{context}: overrides must be a mapping of scanner to relaxation")
+    parsed: dict[str, ScannerOverride] = {}
+    for scanner, body in raw.items():
+        scanner = str(scanner)
+        if scanner not in policy.required_scanners:
+            raise SkillPinError(
+                f"{context}: override names {scanner!r}, which is not in "
+                f"policy.scanners.required {policy.required_scanners}"
+            )
+        parsed[scanner] = ScannerOverride.from_dict(scanner, body)
+    return parsed
 
 
 def load_manifest(path: Path = MANIFEST_PATH) -> tuple[Policy, list[SkillSpec]]:
@@ -133,6 +205,9 @@ def load_manifest(path: Path = MANIFEST_PATH) -> tuple[Policy, list[SkillSpec]]:
                 path=entry["path"].strip("/"),
                 ref=entry.get("ref", "main"),
                 slug=entry.get("slug"),
+                overrides=parse_overrides(
+                    entry.get("overrides"), policy, f"skill {entry['name']!r}"
+                ),
             )
         )
     keys = [s.key for s in specs]
@@ -336,13 +411,25 @@ def fetch_scan_report(slug: str, scanner: str) -> dict:
     return report
 
 
-def evaluate_scans(slug: str, policy: Policy) -> tuple[dict, list[str]]:
+def evaluate_scans(
+    slug: str, policy: Policy, overrides: dict[str, ScannerOverride] | None = None
+) -> tuple[dict, list[str]]:
     reports: dict[str, dict] = {}
     blockers: list[str] = []
-    limit = RISK_ORDER.index(policy.max_risk)
+    overrides = overrides or {}
 
     for scanner in policy.required_scanners:
+        override = overrides.get(scanner)
+        max_risk = policy.max_risk
+        accepted = PASSING_VERDICTS
+        if override:
+            max_risk = override.max_risk or max_risk
+            accepted = PASSING_VERDICTS | set(override.verdicts)
+        limit = RISK_ORDER.index(max_risk)
+
         report = fetch_scan_report(slug, scanner)
+        if override:
+            report = {**report, "overridden": override.to_dict()}
         reports[scanner] = report
         if report["status"] != "ok":
             if not policy.allow_missing_report:
@@ -350,7 +437,7 @@ def evaluate_scans(slug: str, policy: Policy) -> tuple[dict, list[str]]:
             continue
 
         verdict = report.get("verdict")
-        if verdict is not None and verdict not in PASSING_VERDICTS:
+        if verdict is not None and verdict not in accepted:
             blockers.append(f"{scanner}: verdict is {verdict!r}, not a pass")
 
         risk = report.get("risk")
@@ -360,7 +447,7 @@ def evaluate_scans(slug: str, policy: Policy) -> tuple[dict, list[str]]:
         elif risk not in RISK_ORDER:
             blockers.append(f"{scanner}: unrecognised risk level {risk!r}")
         elif RISK_ORDER.index(risk) > limit:
-            blockers.append(f"{scanner}: risk {risk} exceeds max_risk {policy.max_risk}")
+            blockers.append(f"{scanner}: risk {risk} exceeds max_risk {max_risk}")
 
     return reports, blockers
 

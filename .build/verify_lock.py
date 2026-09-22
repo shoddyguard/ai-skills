@@ -23,6 +23,12 @@ def verify_entry(spec: sp.SkillSpec, entry: dict, offline: bool) -> list[str]:
         if entry.get(field) != expected:
             problems.append(f"{field} drifted: lock has {entry.get(field)!r}, manifest has {expected!r}")
 
+    if entry.get("overrides", {}) != spec.override_record:
+        problems.append(
+            f"overrides drifted: lock has {entry.get('overrides', {})}, "
+            f"manifest has {spec.override_record}"
+        )
+
     commit = entry.get("commit", "")
     if len(commit) != 40 or not all(c in "0123456789abcdef" for c in commit):
         problems.append(f"commit {commit!r} is not a full 40-character SHA")

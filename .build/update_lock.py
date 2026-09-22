@@ -20,7 +20,7 @@ import skillpin as sp
 def build_entry(spec: sp.SkillSpec, commit: dict, tree_sha: str, digest: str,
                 capabilities: dict, scans: dict, previous: dict | None) -> dict:
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    return {
+    entry = {
         "name": spec.name,
         "repo": spec.repo,
         "path": spec.path,
@@ -35,6 +35,9 @@ def build_entry(spec: sp.SkillSpec, commit: dict, tree_sha: str, digest: str,
         "pinnedAt": now,
         "firstPinnedAt": (previous or {}).get("firstPinnedAt", now),
     }
+    if spec.overrides:
+        entry["overrides"] = spec.override_record
+    return entry
 
 
 def fingerprint(lock: dict) -> str:
@@ -47,16 +50,27 @@ def fingerprint(lock: dict) -> str:
 def process(spec: sp.SkillSpec, policy: sp.Policy, lock: dict, force: bool) -> str:
     previous = lock["skills"].get(spec.key)
     commit = sp.newest_eligible_commit(spec, policy.min_age_days)
+    overrides_changed = previous is not None and (
+        previous.get("overrides", {}) != spec.override_record
+    )
 
-    if previous and previous.get("commit") == commit["sha"] and not force:
+    if (
+        previous
+        and previous.get("commit") == commit["sha"]
+        and not overrides_changed
+        and not force
+    ):
         sp.log(f"  up to date at {commit['sha'][:12]} ({commit['age_days']}d old)")
         lock["held"].pop(spec.key, None)
         return "unchanged"
 
+    for scanner, override in sorted(spec.overrides.items()):
+        sp.log(f"  override on {scanner}: {override.reason}")
+
     tree_sha, files = sp.download_skill(spec, commit["sha"])
     digest = sp.content_digest(files)
     capabilities = sp.extract_capabilities(files)
-    scans, blockers = sp.evaluate_scans(spec.scan_slug, policy)
+    scans, blockers = sp.evaluate_scans(spec.scan_slug, policy, spec.overrides)
 
     if policy.block_on_new_capabilities:
         added = sp.new_capabilities(
