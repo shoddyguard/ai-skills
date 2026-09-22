@@ -1,0 +1,48 @@
+{
+  "generatedAt": "2026-09-22T11:05:23+00:00",
+  "held": {},
+  "lockfileVersion": 1,
+  "skills": {
+    "cursor/plugins/cursor-team-kit/skills/thermo-nuclear-code-quality-review": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "6e3d2ea56d7d446b955eaae6ac4c8eef8bf504cf",
+      "commitDate": "2026-05-28T16:19:23Z",
+      "contentDigest": "sha256:e4ddbf2e7dacd1503b9e02701cd953fef3abeccb04b718aefe701f1921ff4db9",
+      "firstPinnedAt": "2026-09-22T10:23:23+00:00",
+      "name": "thermo-nuclear-code-quality-review",
+      "path": "cursor-team-kit/skills/thermo-nuclear-code-quality-review",
+      "pinnedAt": "2026-09-22T11:05:23+00:00",
+      "ref": "main",
+      "repo": "cursor/plugins",
+      "scanSlug": "cursor/plugins/thermo-nuclear-code-quality-review",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Jun 12, 2026, 07:42 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/cursor/plugins/thermo-nuclear-code-quality-review/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Jun 12, 2026, 07:46 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/cursor/plugins/thermo-nuclear-code-quality-review/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Jun 12, 2026, 07:42 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/cursor/plugins/thermo-nuclear-code-quality-review/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "d9c8935dd560b3b6f5941247d04a1843f8c7cc35"
+    }
+  }
+}
