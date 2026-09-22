@@ -67,12 +67,21 @@ class ReportParsing(unittest.TestCase):
 
 
 class ScanGate(unittest.TestCase):
-    def evaluate(self, reports: dict[str, dict], pol: sp.Policy) -> list[str]:
+    def evaluate(self, reports: dict[str, dict], pol: sp.Policy, overrides=None) -> list[str]:
         original = sp.fetch_scan_report
         sp.fetch_scan_report = lambda slug, scanner: reports[scanner]
         try:
-            _, blockers = sp.evaluate_scans("owner/repo/skill", pol)
+            _, blockers = sp.evaluate_scans("owner/repo/skill", pol, overrides)
             return blockers
+        finally:
+            sp.fetch_scan_report = original
+
+    def reports(self, reports: dict[str, dict], pol: sp.Policy, overrides=None) -> dict:
+        original = sp.fetch_scan_report
+        sp.fetch_scan_report = lambda slug, scanner: reports[scanner]
+        try:
+            collected, _ = sp.evaluate_scans("owner/repo/skill", pol, overrides)
+            return collected
         finally:
             sp.fetch_scan_report = original
 
@@ -95,6 +104,82 @@ class ScanGate(unittest.TestCase):
         self.assertTrue(self.evaluate(reports, policy()))
         permissive = policy(scanners={"required": ["snyk"], "max_risk": "low", "allow_missing_report": True})
         self.assertEqual(self.evaluate(reports, permissive), [])
+
+
+class ScannerOverrides(unittest.TestCase):
+    warned = {"snyk": {"status": "ok", "verdict": "warn", "risk": "medium"}}
+
+    def override(self, **kwargs) -> dict:
+        base = {"reason": "W012, report template pulls tailwind from a CDN"}
+        base.update(kwargs)
+        return {"snyk": sp.ScannerOverride.from_dict("snyk", base)}
+
+    def test_override_clears_both_the_verdict_and_the_risk_ceiling(self):
+        gate = ScanGate()
+        overrides = self.override(max_risk="medium", verdicts=["warn"])
+        self.assertEqual(gate.evaluate(self.warned, policy(), overrides), [])
+
+    def test_override_only_relaxes_what_it_names(self):
+        gate = ScanGate()
+        blockers = gate.evaluate(self.warned, policy(), self.override(verdicts=["warn"]))
+        self.assertEqual(len(blockers), 1)
+        self.assertIn("exceeds max_risk low", blockers[0])
+
+    def test_override_does_not_apply_to_other_scanners(self):
+        pol = policy(scanners={"required": ["snyk", "socket"], "max_risk": "low"})
+        reports = {**self.warned, "socket": {"status": "ok", "verdict": "warn", "risk": "medium"}}
+        gate = ScanGate()
+        blockers = gate.evaluate(reports, pol, self.override(max_risk="medium", verdicts=["warn"]))
+        self.assertEqual(len(blockers), 2)
+        self.assertTrue(all(b.startswith("socket:") for b in blockers))
+
+    def test_override_never_excuses_a_missing_report(self):
+        gate = ScanGate()
+        reports = {"snyk": {"status": "missing", "httpStatus": 404}}
+        overrides = self.override(max_risk="critical", verdicts=["warn", "fail"])
+        self.assertTrue(gate.evaluate(reports, policy(), overrides))
+
+    def test_applied_override_is_recorded_on_the_report(self):
+        gate = ScanGate()
+        overrides = self.override(max_risk="medium", verdicts=["warn"])
+        collected = gate.reports(self.warned, policy(), overrides)
+        self.assertEqual(collected["snyk"]["overridden"]["max_risk"], "medium")
+        self.assertIn("W012", collected["snyk"]["overridden"]["reason"])
+
+    def test_override_without_a_reason_is_rejected(self):
+        with self.assertRaises(sp.SkillPinError):
+            sp.ScannerOverride.from_dict("snyk", {"max_risk": "medium"})
+
+    def test_override_that_relaxes_nothing_is_rejected(self):
+        with self.assertRaises(sp.SkillPinError):
+            sp.ScannerOverride.from_dict("snyk", {"reason": "because I said so"})
+
+    def test_unknown_keys_and_bad_risk_levels_are_rejected(self):
+        with self.assertRaises(sp.SkillPinError):
+            sp.ScannerOverride.from_dict("snyk", {"reason": "r", "max_rsk": "medium"})
+        with self.assertRaises(sp.SkillPinError):
+            sp.ScannerOverride.from_dict("snyk", {"reason": "r", "max_risk": "spicy"})
+
+    def test_override_for_a_scanner_we_do_not_require_is_rejected(self):
+        with self.assertRaises(sp.SkillPinError):
+            sp.parse_overrides({"nosuchscanner": {"reason": "r", "max_risk": "medium"}}, policy(), "skill 'demo'")
+
+    def test_verdicts_are_normalised_and_a_bare_string_is_accepted(self):
+        override = sp.ScannerOverride.from_dict("snyk", {"reason": "r", "verdicts": " Warn "})
+        self.assertEqual(override.verdicts, ["warn"])
+
+    def test_record_round_trips_for_the_lockfile(self):
+        spec = sp.SkillSpec(
+            name="demo",
+            repo="owner/repo",
+            path="skills/demo",
+            overrides=self.override(max_risk="medium", verdicts=["warn"]),
+        )
+        self.assertEqual(
+            spec.override_record,
+            {"snyk": {"reason": "W012, report template pulls tailwind from a CDN",
+                      "max_risk": "medium", "verdicts": ["warn"]}},
+        )
 
 
 class CapabilityExtraction(unittest.TestCase):
@@ -238,6 +323,16 @@ class LockVerification(unittest.TestCase):
     def test_manifest_drift_is_reported(self):
         problems = verify_lock.verify_entry(self.spec, self.entry(ref="next"), offline=True)
         self.assertIn("ref drifted", problems[0])
+
+    def test_an_override_added_to_the_manifest_alone_is_drift(self):
+        spec = sp.SkillSpec(
+            name="demo",
+            repo="owner/repo",
+            path="skills/demo",
+            overrides={"snyk": sp.ScannerOverride(reason="r", max_risk="medium")},
+        )
+        problems = verify_lock.verify_entry(spec, self.entry(), offline=True)
+        self.assertIn("overrides drifted", problems[0])
 
     def test_tree_sha_mismatch_is_caught(self):
         digest = sp.content_digest([("SKILL.md", b"x")])

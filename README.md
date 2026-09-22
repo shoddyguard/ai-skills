@@ -67,6 +67,28 @@ python .build/verify_lock.py
 A brand new skill that fails the gate is never pinned at all, so it will not
 appear in `skills.lock.json` until it passes.
 
+### Overriding a scanner verdict
+
+Sometimes a update is worth taking despite a scanner failure. An entry can relax a named scanner if desired:
+
+```yaml
+  - name: some-skill
+    repo: owner/repo
+    path: path/to/skills/some-skill
+    ref: main
+    overrides:
+      snyk:
+        max_risk: medium
+        verdicts: [warn]
+        reason: "W012, the HTML report template loads tailwind from a CDN at runtime"
+```
+
+| Key | Purpose |
+| --- | --- |
+| `max_risk` | Risk ceiling for this scanner on this skill, replacing `policy.scanners.max_risk` |
+| `verdicts` | Extra verdicts to treat as a pass alongside `pass`, `passed` and `ok` |
+| `reason` | Why the finding is acceptable, required |
+
 ### Commands
 
 | Command | Does |
