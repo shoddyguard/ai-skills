@@ -1,8 +1,49 @@
 {
-  "generatedAt": "2026-09-22T11:05:23+00:00",
+  "generatedAt": "2026-09-22T12:12:59+00:00",
   "held": {},
   "lockfileVersion": 1,
   "skills": {
+    "anthropics/skills/skills/frontend-design": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "2235be7c60b551f5de82ade908fd3816455afcda",
+      "commitDate": "2026-06-09T19:33:41Z",
+      "contentDigest": "sha256:e6cfd86e419a2b8239e94ba025b0fba0c7d199c4560c678d2b72d3098153cb18",
+      "firstPinnedAt": "2026-09-22T12:12:58+00:00",
+      "name": "frontend-design",
+      "path": "skills/frontend-design",
+      "pinnedAt": "2026-09-22T12:12:58+00:00",
+      "ref": "main",
+      "repo": "anthropics/skills",
+      "scanSlug": "anthropics/skills/frontend-design",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 15, 2026, 09:04 AM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/anthropics/skills/frontend-design/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 15, 2026, 09:03 AM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/anthropics/skills/frontend-design/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 15, 2026, 09:04 AM",
+          "status": "ok",
+          "url": "https://www.skills.sh/anthropics/skills/frontend-design/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296"
+    },
     "cursor/plugins/cursor-team-kit/skills/thermo-nuclear-code-quality-review": {
       "capabilities": {
         "access": {},
@@ -43,6 +84,211 @@
         }
       },
       "treeSha": "d9c8935dd560b3b6f5941247d04a1843f8c7cc35"
+    },
+    "dietrichgebert/ponytail/skills/ponytail": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "b6c04480c03e8db2f035751d7c46289779ec3362",
+      "commitDate": "2026-07-10T00:52:02Z",
+      "contentDigest": "sha256:d0844e234a09308edb125b72ff617f4adf15799b0580fab3993a6922f7032330",
+      "firstPinnedAt": "2026-09-22T12:12:59+00:00",
+      "name": "ponytail",
+      "path": "skills/ponytail",
+      "pinnedAt": "2026-09-22T12:12:59+00:00",
+      "ref": "main",
+      "repo": "dietrichgebert/ponytail",
+      "scanSlug": "dietrichgebert/ponytail/ponytail",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Jul 10, 2026, 07:36 AM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/dietrichgebert/ponytail/ponytail/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Jul 10, 2026, 07:36 AM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/dietrichgebert/ponytail/ponytail/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Jul 10, 2026, 07:36 AM",
+          "status": "ok",
+          "url": "https://www.skills.sh/dietrichgebert/ponytail/ponytail/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "cb6e53477eaf04e6daeca22feacb85f9ce20d40c"
+    },
+    "mattpocock/skills/skills/engineering/grill-with-docs": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "447ca70872026d5b79d6073a546dac082117fed7",
+      "commitDate": "2026-08-15T20:48:40Z",
+      "contentDigest": "sha256:8973c3d9463fc9dd708adc36a0f97b01aab4ae7d6a0217c2aa0f0a7ef206b83c",
+      "firstPinnedAt": "2026-09-22T12:12:53+00:00",
+      "name": "grill-with-docs",
+      "path": "skills/engineering/grill-with-docs",
+      "pinnedAt": "2026-09-22T12:12:53+00:00",
+      "ref": "main",
+      "repo": "mattpocock/skills",
+      "scanSlug": "mattpocock/skills/grill-with-docs",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 14, 2026, 06:51 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 14, 2026, 06:51 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 14, 2026, 06:51 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "eedaf2562c83155115e9c649fa3ecaac2e10e81d"
+    },
+    "mattpocock/skills/skills/engineering/prototype": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "321658273cb1d20b76026717d027d505790106d4",
+      "commitDate": "2026-08-19T10:03:37Z",
+      "contentDigest": "sha256:6890ef757ada4b0b571e74c28b69fda697ba2e18f564860f4c9373cbbe50535c",
+      "firstPinnedAt": "2026-09-22T12:12:57+00:00",
+      "name": "prototype",
+      "path": "skills/engineering/prototype",
+      "pinnedAt": "2026-09-22T12:12:57+00:00",
+      "ref": "main",
+      "repo": "mattpocock/skills",
+      "scanSlug": "mattpocock/skills/prototype",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca"
+    },
+    "mattpocock/skills/skills/engineering/tdd": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "321658273cb1d20b76026717d027d505790106d4",
+      "commitDate": "2026-08-19T10:03:37Z",
+      "contentDigest": "sha256:54e51060ae5a774b3f82d887e5faf881c96c9b07e42047559412338f2a1eecba",
+      "firstPinnedAt": "2026-09-22T12:12:56+00:00",
+      "name": "tdd",
+      "path": "skills/engineering/tdd",
+      "pinnedAt": "2026-09-22T12:12:56+00:00",
+      "ref": "main",
+      "repo": "mattpocock/skills",
+      "scanSlug": "mattpocock/skills/tdd",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "79288be15c67b849f22b6572056601090fd20913"
+    },
+    "mattpocock/skills/skills/productivity/grill-me": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "fcf0071560d32913c9d4f820e0d7ca467c881619",
+      "commitDate": "2026-08-15T20:46:38Z",
+      "contentDigest": "sha256:eb2880386e9259f4ca51167f518c81cea969850d8f45bd8f79f579dcbbad902e",
+      "firstPinnedAt": "2026-09-22T12:12:53+00:00",
+      "name": "grill-me",
+      "path": "skills/productivity/grill-me",
+      "pinnedAt": "2026-09-22T12:12:53+00:00",
+      "ref": "main",
+      "repo": "mattpocock/skills",
+      "scanSlug": "mattpocock/skills/grill-me",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 14, 2026, 06:47 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 14, 2026, 06:46 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 14, 2026, 06:47 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "3df14e2d3a89459bf300614be9247e3ce74798f8"
     }
   }
 }

@@ -15,3 +15,27 @@ skills:
     repo: cursor/plugins
     path: cursor-team-kit/skills/thermo-nuclear-code-quality-review
     ref: main
+  - name: grill-me
+    repo: mattpocock/skills
+    path: skills/productivity/grill-me
+    ref: main
+  - name: grill-with-docs
+    repo: mattpocock/skills
+    path: skills/engineering/grill-with-docs
+    ref: main
+  - name: tdd
+    repo: mattpocock/skills
+    path: skills/engineering/tdd
+    ref: main
+  - name: prototype
+    repo: mattpocock/skills
+    path: skills/engineering/prototype
+    ref: main
+  - name: frontend-design
+    repo: anthropics/skills
+    path: skills/frontend-design
+    ref: main
+  - name: ponytail
+    repo: dietrichgebert/ponytail
+    path: skills/ponytail
+    ref: main
