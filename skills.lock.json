@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-22T12:12:59+00:00",
+  "generatedAt": "2026-09-23T09:01:00+00:00",
   "held": {},
   "lockfileVersion": 1,
   "skills": {
@@ -207,6 +207,47 @@
         }
       },
       "treeSha": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca"
+    },
+    "mattpocock/skills/skills/engineering/setup-matt-pocock-skills": {
+      "capabilities": {
+        "access": {},
+        "allowedTools": [],
+        "egress": {},
+        "scripts": []
+      },
+      "commit": "5c89081d4bbeb3d039a42093653f90bb698d780e",
+      "commitDate": "2026-08-19T13:01:26Z",
+      "contentDigest": "sha256:b24ded80f67b626ba05a182655c9e68d19dc1c8443450eda0b14e1438b7bf392",
+      "firstPinnedAt": "2026-09-23T09:00:59+00:00",
+      "name": "setup-matt-pocock-skills",
+      "path": "skills/engineering/setup-matt-pocock-skills",
+      "pinnedAt": "2026-09-23T09:00:59+00:00",
+      "ref": "main",
+      "repo": "mattpocock/skills",
+      "scanSlug": "mattpocock/skills/setup-matt-pocock-skills",
+      "scans": {
+        "agent-trust-hub": {
+          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "risk": "none",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/agent-trust-hub",
+          "verdict": "pass"
+        },
+        "snyk": {
+          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "risk": "low",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/snyk",
+          "verdict": "pass"
+        },
+        "socket": {
+          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "status": "ok",
+          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/socket",
+          "verdict": "pass"
+        }
+      },
+      "treeSha": "ec07f82df54064d01aa1648670e81da41e2cbdc2"
     },
     "mattpocock/skills/skills/engineering/tdd": {
       "capabilities": {

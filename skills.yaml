@@ -15,6 +15,10 @@ skills:
     repo: cursor/plugins
     path: cursor-team-kit/skills/thermo-nuclear-code-quality-review
     ref: main
+  - name: setup-matt-pocock-skills
+    repo: mattpocock/skills
+    path: skills/engineering/setup-matt-pocock-skills
+    ref: main
   - name: grill-me
     repo: mattpocock/skills
     path: skills/productivity/grill-me
