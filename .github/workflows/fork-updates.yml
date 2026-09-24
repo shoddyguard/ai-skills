@@ -1,0 +1,76 @@
+name: Report fork updates
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: fork-updates
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --require-hashes -r .build/requirements.txt
+
+      - name: Forks match the manifest and lockfile
+        run: python .build/sync_forks.py --check
+
+      - name: Report upstream changes
+        id: report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python .build/sync_forks.py --summary forks.json 2>&1 | tee forks.log
+          echo "available=$(jq -r '.available | length' forks.json)" >> "$GITHUB_OUTPUT"
+          echo "needs-care=$(jq -r '.needsCare | length' forks.json)" >> "$GITHUB_OUTPUT"
+          echo "blocked=$(jq -r '.blocked | length' forks.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Summarise the run
+        if: always()
+        run: |
+          {
+            echo "### Fork update report"
+            echo
+            echo '```'
+            cat forks.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Raise or update the tracking issue
+        if: steps.report.outputs.available != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: "Upstream changes available for skill forks"
+        run: |
+          {
+            echo "${{ steps.report.outputs.available }} fork(s) have upstream changes."
+            echo "${{ steps.report.outputs.needs-care }} of them touch a file we patched."
+            echo "${{ steps.report.outputs.blocked }} candidate(s) were blocked by policy."
+            echo
+            echo "Nothing has been changed on disk: forks are never updated automatically."
+            echo "Review with \`python .build/sync_forks.py --diff <skill>\`, apply by hand,"
+            echo "then \`python .build/sync_forks.py --record --path <skill> --commit <sha>\`."
+            echo
+            echo '```'
+            cat forks.log
+            echo '```'
+          } > body.md
+          existing=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body-file body.md
+          else
+            gh issue create --title "$TITLE" --body-file body.md
+          fi

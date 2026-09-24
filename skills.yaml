@@ -15,26 +15,6 @@ skills:
     repo: cursor/plugins
     path: cursor-team-kit/skills/thermo-nuclear-code-quality-review
     ref: main
-  - name: setup-matt-pocock-skills
-    repo: mattpocock/skills
-    path: skills/engineering/setup-matt-pocock-skills
-    ref: main
-  - name: grill-me
-    repo: mattpocock/skills
-    path: skills/productivity/grill-me
-    ref: main
-  - name: grill-with-docs
-    repo: mattpocock/skills
-    path: skills/engineering/grill-with-docs
-    ref: main
-  - name: tdd
-    repo: mattpocock/skills
-    path: skills/engineering/tdd
-    ref: main
-  - name: prototype
-    repo: mattpocock/skills
-    path: skills/engineering/prototype
-    ref: main
   - name: frontend-design
     repo: anthropics/skills
     path: skills/frontend-design
@@ -43,3 +23,56 @@ skills:
     repo: dietrichgebert/ponytail
     path: skills/ponytail
     ref: main
+
+forks:
+  - repo: mattpocock/skills
+    ref: main
+    dir: forks/mattpocock
+    strip: skills/
+    extra_files:
+      - skills/engineering/README.md
+      - skills/productivity/README.md
+    skills:
+      - path: skills/engineering/codebase-design
+        patched: true
+      - path: skills/engineering/code-review
+        patched: true
+      - path: skills/engineering/diagnosing-bugs
+        patched: true
+      - path: skills/engineering/domain-modeling
+        patched: true
+      - path: skills/engineering/grill-with-docs
+        patched: true
+      - path: skills/engineering/implement
+      - path: skills/engineering/improve-codebase-architecture
+        patched: true
+      - path: skills/engineering/prototype
+        patched: true
+      - path: skills/engineering/research
+        patched: true
+      - path: skills/engineering/resolving-merge-conflicts
+      - path: skills/engineering/setup-matt-pocock-skills
+        patched: true
+        rename: setup-shoddyguard-skills
+      - path: skills/engineering/tdd
+        patched: true
+      - path: skills/engineering/to-spec
+        patched: true
+      - path: skills/engineering/to-tickets
+        patched: true
+      - path: skills/engineering/triage
+        patched: true
+      - path: skills/engineering/wayfinder
+        patched: true
+      - path: skills/engineering/wizard
+        patched: true
+      - path: skills/productivity/grilling
+      - path: skills/productivity/grill-me
+      - path: skills/productivity/handoff
+      - path: skills/productivity/teach
+        patched: true
+      - path: skills/productivity/to-questionnaire
+        patched: true
+      - path: skills/productivity/wait-what
+        patched: true
+      - path: skills/productivity/writing-for-agents

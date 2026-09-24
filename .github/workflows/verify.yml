@@ -27,3 +27,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python .build/verify_lock.py
+
+      - name: Forks match the manifest and lockfile
+        run: python .build/sync_forks.py --check
