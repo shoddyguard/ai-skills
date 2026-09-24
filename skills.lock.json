@@ -1,5 +1,184 @@
 {
-  "generatedAt": "2026-09-23T09:01:00+00:00",
+  "forks": {
+    "mattpocock/skills": {
+      "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "baseCommitDate": "2026-09-18T10:12:29Z",
+      "importedAt": "2026-09-24T01:27:35+00:00",
+      "ref": "main",
+      "skills": {
+        "skills/engineering/code-review": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:e42639245513c4db6a8f3177b1e29c9dc1b6eec1d7fa4b3814fbc0c364a50cd8",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/codebase-design": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:c4b8438da526ef8aa2f9ebc96eee802d2e49b1bcbe62832a14bb70ecefe196b3",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/diagnosing-bugs": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:c400fdd9459844d45be4b6b03d2e5b2e990eb10325373ab02990b553b53baace",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/domain-modeling": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:1cbd7e91111aadbad130e4eb836ed7ff4fd2ee4649bb9d157e2700c0ada3909f",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/grill-with-docs": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:86ec3733c3332dfb268297101b604157aef11d0ff5e736b01723bf9250da3b08",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/implement": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:6ccd785bf4cde85cc7bf344960c765d654911c9deac7761d81e811d5a2e8c2dd",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/improve-codebase-architecture": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:baba8dc3731c249dd445782f8332d161b7ca4ab59e9218a301a246383135824b",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/prototype": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:f945ca982631dedc0b1edd2ee202bed59f386a1142dd3bea8827e72b9bcae7bd",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/research": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:33a1f5d9ee2617a410da71c45e6c987734cb76ec9131828dfd4f81f75973e462",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/resolving-merge-conflicts": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:531c4ec7bab28d0ce58fe32659030551a5b08acdfec682d06dee752d2bf5c72d",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/setup-matt-pocock-skills": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:cd312d624bf93efd860312b101dbd0028c3e6317ebaa0c460c107ee928b42d3c",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/tdd": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:f491f3d8bfb1588a6eb7b8cfcf3d17f6f022f4dbd0b405f64bd4dc06eaa92a39",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/to-spec": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:dbe035a47994c6b389ba2291fc8f4f03e51db963e31be7187adb2dd25792245c",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/to-tickets": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:ec0be737df10a03e28c04badd40b6c9dc50d344c4ddfdb3eac2ab2402f2c835c",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/triage": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:db6179d21b02982902bbfb9ac866cc697c4e94823341ab39ce1c1c9b1a75f217",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/wayfinder": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:2f1fb09075a9da4185efcda834cc1335669971057ca4a0760273688d59759f2e",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/engineering/wizard": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:1f772f2cc426cc101f11db9a91fd5d4f2c4f5426572c65909166bd62f9119b40",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/grill-me": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:eb2880386e9259f4ca51167f518c81cea969850d8f45bd8f79f579dcbbad902e",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/grilling": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:6ab7676f85887896c10671e1ab5ac30195c8d036a4d607963407b8b05947f980",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/handoff": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:793887bbd3d0a82fb827cc3642dd4c1147d6a20c0551a0c690f9a49be91e8df1",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/teach": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:c701b9b566bcc4c4050373d0ddcd59eeca716ede2aa548cdf181913b62525dd5",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/to-questionnaire": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:220b04dfcafe8845d2a613af2a89b0cb50b6f5b78008bc1dc680463d6d04da27",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/wait-what": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:1dfeff6360efc83579c2b6c60b924f06c7a0737a54459dc267a644353766ffbd",
+          "patched": true,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        },
+        "skills/productivity/writing-for-agents": {
+          "baseCommit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+          "baseCommitDate": "2026-09-18T10:12:29Z",
+          "localDigest": "sha256:dfc57c19e0f7a7e9c371966d765700d74ecae7694377c095095ee94f6fd216b3",
+          "patched": false,
+          "recordedAt": "2026-09-24T01:57:06+00:00"
+        }
+      },
+      "dir": "forks/mattpocock"
+    }
+  },
+  "generatedAt": "2026-09-24T01:27:35+00:00",
   "held": {},
   "lockfileVersion": 1,
   "skills": {
@@ -125,211 +304,6 @@
         }
       },
       "treeSha": "cb6e53477eaf04e6daeca22feacb85f9ce20d40c"
-    },
-    "mattpocock/skills/skills/engineering/grill-with-docs": {
-      "capabilities": {
-        "access": {},
-        "allowedTools": [],
-        "egress": {},
-        "scripts": []
-      },
-      "commit": "447ca70872026d5b79d6073a546dac082117fed7",
-      "commitDate": "2026-08-15T20:48:40Z",
-      "contentDigest": "sha256:8973c3d9463fc9dd708adc36a0f97b01aab4ae7d6a0217c2aa0f0a7ef206b83c",
-      "firstPinnedAt": "2026-09-22T12:12:53+00:00",
-      "name": "grill-with-docs",
-      "path": "skills/engineering/grill-with-docs",
-      "pinnedAt": "2026-09-22T12:12:53+00:00",
-      "ref": "main",
-      "repo": "mattpocock/skills",
-      "scanSlug": "mattpocock/skills/grill-with-docs",
-      "scans": {
-        "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:51 PM",
-          "risk": "none",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/agent-trust-hub",
-          "verdict": "pass"
-        },
-        "snyk": {
-          "analyzed": "Sep 14, 2026, 06:51 PM",
-          "risk": "low",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/snyk",
-          "verdict": "pass"
-        },
-        "socket": {
-          "analyzed": "Sep 14, 2026, 06:51 PM",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-with-docs/security/socket",
-          "verdict": "pass"
-        }
-      },
-      "treeSha": "eedaf2562c83155115e9c649fa3ecaac2e10e81d"
-    },
-    "mattpocock/skills/skills/engineering/prototype": {
-      "capabilities": {
-        "access": {},
-        "allowedTools": [],
-        "egress": {},
-        "scripts": []
-      },
-      "commit": "321658273cb1d20b76026717d027d505790106d4",
-      "commitDate": "2026-08-19T10:03:37Z",
-      "contentDigest": "sha256:6890ef757ada4b0b571e74c28b69fda697ba2e18f564860f4c9373cbbe50535c",
-      "firstPinnedAt": "2026-09-22T12:12:57+00:00",
-      "name": "prototype",
-      "path": "skills/engineering/prototype",
-      "pinnedAt": "2026-09-22T12:12:57+00:00",
-      "ref": "main",
-      "repo": "mattpocock/skills",
-      "scanSlug": "mattpocock/skills/prototype",
-      "scans": {
-        "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
-          "risk": "none",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/agent-trust-hub",
-          "verdict": "pass"
-        },
-        "snyk": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
-          "risk": "low",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/snyk",
-          "verdict": "pass"
-        },
-        "socket": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/prototype/security/socket",
-          "verdict": "pass"
-        }
-      },
-      "treeSha": "e41d92e171f074a2b6887d8f6faca4a15c83d1ca"
-    },
-    "mattpocock/skills/skills/engineering/setup-matt-pocock-skills": {
-      "capabilities": {
-        "access": {},
-        "allowedTools": [],
-        "egress": {},
-        "scripts": []
-      },
-      "commit": "5c89081d4bbeb3d039a42093653f90bb698d780e",
-      "commitDate": "2026-08-19T13:01:26Z",
-      "contentDigest": "sha256:b24ded80f67b626ba05a182655c9e68d19dc1c8443450eda0b14e1438b7bf392",
-      "firstPinnedAt": "2026-09-23T09:00:59+00:00",
-      "name": "setup-matt-pocock-skills",
-      "path": "skills/engineering/setup-matt-pocock-skills",
-      "pinnedAt": "2026-09-23T09:00:59+00:00",
-      "ref": "main",
-      "repo": "mattpocock/skills",
-      "scanSlug": "mattpocock/skills/setup-matt-pocock-skills",
-      "scans": {
-        "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
-          "risk": "none",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/agent-trust-hub",
-          "verdict": "pass"
-        },
-        "snyk": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
-          "risk": "low",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/snyk",
-          "verdict": "pass"
-        },
-        "socket": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/socket",
-          "verdict": "pass"
-        }
-      },
-      "treeSha": "ec07f82df54064d01aa1648670e81da41e2cbdc2"
-    },
-    "mattpocock/skills/skills/engineering/tdd": {
-      "capabilities": {
-        "access": {},
-        "allowedTools": [],
-        "egress": {},
-        "scripts": []
-      },
-      "commit": "321658273cb1d20b76026717d027d505790106d4",
-      "commitDate": "2026-08-19T10:03:37Z",
-      "contentDigest": "sha256:54e51060ae5a774b3f82d887e5faf881c96c9b07e42047559412338f2a1eecba",
-      "firstPinnedAt": "2026-09-22T12:12:56+00:00",
-      "name": "tdd",
-      "path": "skills/engineering/tdd",
-      "pinnedAt": "2026-09-22T12:12:56+00:00",
-      "ref": "main",
-      "repo": "mattpocock/skills",
-      "scanSlug": "mattpocock/skills/tdd",
-      "scans": {
-        "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
-          "risk": "none",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/agent-trust-hub",
-          "verdict": "pass"
-        },
-        "snyk": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
-          "risk": "low",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/snyk",
-          "verdict": "pass"
-        },
-        "socket": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/tdd/security/socket",
-          "verdict": "pass"
-        }
-      },
-      "treeSha": "79288be15c67b849f22b6572056601090fd20913"
-    },
-    "mattpocock/skills/skills/productivity/grill-me": {
-      "capabilities": {
-        "access": {},
-        "allowedTools": [],
-        "egress": {},
-        "scripts": []
-      },
-      "commit": "fcf0071560d32913c9d4f820e0d7ca467c881619",
-      "commitDate": "2026-08-15T20:46:38Z",
-      "contentDigest": "sha256:eb2880386e9259f4ca51167f518c81cea969850d8f45bd8f79f579dcbbad902e",
-      "firstPinnedAt": "2026-09-22T12:12:53+00:00",
-      "name": "grill-me",
-      "path": "skills/productivity/grill-me",
-      "pinnedAt": "2026-09-22T12:12:53+00:00",
-      "ref": "main",
-      "repo": "mattpocock/skills",
-      "scanSlug": "mattpocock/skills/grill-me",
-      "scans": {
-        "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:47 PM",
-          "risk": "none",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/agent-trust-hub",
-          "verdict": "pass"
-        },
-        "snyk": {
-          "analyzed": "Sep 14, 2026, 06:46 PM",
-          "risk": "low",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/snyk",
-          "verdict": "pass"
-        },
-        "socket": {
-          "analyzed": "Sep 14, 2026, 06:47 PM",
-          "status": "ok",
-          "url": "https://www.skills.sh/mattpocock/skills/grill-me/security/socket",
-          "verdict": "pass"
-        }
-      },
-      "treeSha": "3df14e2d3a89459bf300614be9247e3ce74798f8"
     }
   }
 }

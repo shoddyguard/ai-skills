@@ -42,6 +42,13 @@ I recommend fetching by `commit` as this resolves to a SHA.
 
 The `held` section contains any updates that fail our checks and require inspection.
 
+### Forked skills
+
+Skills I keep a patched copy of live in `forks/`, declared under `forks:` in
+`skills.yaml` and recorded in the `forks` block of the lockfile. They deliberately sit
+outside the mechanism above: `update_lock.py` never touches them, and updates are
+reported by `.build/sync_forks.py` but never applied. See [forks/README.md](forks/README.md).
+
 ### Adding a skill
 
 Add an entry to `skills.yaml`:
@@ -98,6 +105,8 @@ Sometimes a update is worth taking despite a scanner failure. An entry can relax
 | `python .build/update_lock.py --force` | Re-resolve and refresh scan data even when the commit is unchanged |
 | `python .build/verify_lock.py` | Check the lockfile against the manifest and re-verify upstream content |
 | `python .build/verify_lock.py --offline` | Structural checks only, no network |
+| `python .build/sync_forks.py` | Report upstream changes to the forks, without applying any |
+| `python .build/sync_forks.py --check` | Check the forks against the manifest, no network |
 | `python -m unittest discover -s .build -p "test_*.py"` | Tests for the gate logic |
 
 Set `GITHUB_TOKEN` to avoid unauthenticated API rate limits.

@@ -173,6 +173,35 @@ class SkillSpec:
         return {name: o.to_dict() for name, o in sorted(self.overrides.items())}
 
 
+@dataclass
+class ForkSkill:
+    spec: SkillSpec
+    patched: bool
+    local_dir: Path
+
+    @property
+    def key(self) -> str:
+        return self.spec.key
+
+
+@dataclass
+class ForkSource:
+    repo: str
+    ref: str
+    dir: Path
+    strip: str
+    skills: list[ForkSkill] = field(default_factory=list)
+    extra_files: list[str] = field(default_factory=list)
+
+    def local_path(self, upstream_path: str, rename: str | None = None) -> Path:
+        relative = upstream_path.strip("/")
+        if self.strip and relative.startswith(self.strip):
+            relative = relative[len(self.strip):]
+        if rename:
+            relative = str(Path(relative).parent / rename)
+        return self.dir / relative
+
+
 def parse_overrides(raw: object, policy: Policy, context: str) -> dict[str, ScannerOverride]:
     if not raw:
         return {}
@@ -217,9 +246,63 @@ def load_manifest(path: Path = MANIFEST_PATH) -> tuple[Policy, list[SkillSpec]]:
     return policy, specs
 
 
+def load_forks(path: Path = MANIFEST_PATH, root: Path = REPO_ROOT) -> list[ForkSource]:
+    raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    sources: list[ForkSource] = []
+    for entry in raw.get("forks") or []:
+        missing = [k for k in ("repo", "dir") if not entry.get(k)]
+        if missing:
+            raise SkillPinError(f"fork source missing required keys {missing}: {entry!r}")
+        source = ForkSource(
+            repo=entry["repo"],
+            ref=entry.get("ref", "main"),
+            dir=root / entry["dir"].strip("/"),
+            strip=(entry.get("strip") or "").lstrip("/"),
+            extra_files=list(entry.get("extra_files") or []),
+        )
+        for skill in entry.get("skills") or []:
+            if not skill.get("path"):
+                raise SkillPinError(f"fork skill in {source.repo} has no path: {skill!r}")
+            upstream_path = skill["path"].strip("/")
+            rename = skill.get("rename")
+            source.skills.append(
+                ForkSkill(
+                    spec=SkillSpec(
+                        name=rename or upstream_path.split("/")[-1],
+                        repo=source.repo,
+                        path=upstream_path,
+                        ref=source.ref,
+                        slug=skill.get("slug"),
+                    ),
+                    patched=bool(skill.get("patched")),
+                    local_dir=source.local_path(upstream_path, rename),
+                )
+            )
+        paths = [s.spec.path for s in source.skills]
+        dupes = {p for p in paths if paths.count(p) > 1}
+        if dupes:
+            raise SkillPinError(f"duplicate fork entries in {source.repo}: {sorted(dupes)}")
+        sources.append(source)
+    repos = [s.repo for s in sources]
+    dupes = {r for r in repos if repos.count(r) > 1}
+    if dupes:
+        raise SkillPinError(f"duplicate fork sources in manifest: {sorted(dupes)}")
+    return sources
+
+
+def read_local_files(directory: Path) -> list[tuple[str, bytes]]:
+    if not directory.is_dir():
+        raise SkillPinError(f"fork directory is missing: {directory}")
+    files = []
+    for path in sorted(directory.rglob("*")):
+        if path.is_file():
+            files.append((path.relative_to(directory).as_posix(), path.read_bytes()))
+    return files
+
+
 def load_lock(path: Path = LOCK_PATH) -> dict:
     if not path.exists():
-        return {"lockfileVersion": LOCKFILE_VERSION, "skills": {}, "held": {}}
+        return {"lockfileVersion": LOCKFILE_VERSION, "skills": {}, "held": {}, "forks": {}}
     data = json.loads(path.read_text(encoding="utf-8"))
     if data.get("lockfileVersion") != LOCKFILE_VERSION:
         raise SkillPinError(
@@ -227,6 +310,7 @@ def load_lock(path: Path = LOCK_PATH) -> dict:
         )
     data.setdefault("skills", {})
     data.setdefault("held", {})
+    data.setdefault("forks", {})
     return data
 
 
@@ -249,8 +333,18 @@ def _request(url: str, accept: str = "application/vnd.github+json") -> bytes:
         return resp.read()
 
 
+def _github_request(url: str, accept: str = "application/vnd.github+json") -> bytes:
+    try:
+        return _request(url, accept=accept)
+    except urllib.error.HTTPError as exc:
+        detail = "rate limit exceeded" if exc.code == 403 else exc.reason
+        raise SkillPinError(f"GitHub returned {exc.code} for {url}: {detail}") from exc
+    except urllib.error.URLError as exc:
+        raise SkillPinError(f"could not reach {url}: {exc.reason}") from exc
+
+
 def github_json(path: str) -> object:
-    return json.loads(_request(f"{GITHUB_API}{path}"))
+    return json.loads(_github_request(f"{GITHUB_API}{path}"))
 
 
 def newest_eligible_commit(spec: SkillSpec, min_age_days: int) -> dict:
@@ -271,6 +365,13 @@ def newest_eligible_commit(spec: SkillSpec, min_age_days: int) -> dict:
     )
 
 
+def commit_date(repo: str, commit: str) -> str:
+    data = github_json(f"/repos/{repo}/commits/{commit}")
+    if not isinstance(data, dict) or "commit" not in data:
+        raise SkillPinError(f"{repo}: could not read commit {commit}")
+    return data["commit"]["committer"]["date"]
+
+
 def fetch_skill_tree(spec: SkillSpec, commit: str) -> tuple[str, list[dict]]:
     tree = github_json(f"/repos/{spec.repo}/git/trees/{commit}:{spec.path}?recursive=1")
     if not isinstance(tree, dict) or "tree" not in tree:
@@ -283,7 +384,12 @@ def fetch_skill_tree(spec: SkillSpec, commit: str) -> tuple[str, list[dict]]:
 
 def fetch_file(spec: SkillSpec, commit: str, rel_path: str) -> bytes:
     url = f"{RAW_HOST}/{spec.repo}/{commit}/{spec.path}/{rel_path}"
-    return _request(url, accept="text/plain")
+    return _github_request(url, accept="text/plain")
+
+
+def fetch_repo_file(repo: str, commit: str, path: str) -> bytes:
+    url = f"{RAW_HOST}/{repo}/{commit}/{path.lstrip('/')}"
+    return _github_request(url, accept="text/plain")
 
 
 def content_digest(files: list[tuple[str, bytes]]) -> str:
