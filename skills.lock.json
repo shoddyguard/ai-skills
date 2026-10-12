@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T09:01:00+00:00",
+  "generatedAt": "2026-10-12T16:23:08+00:00",
   "held": {},
   "lockfileVersion": 1,
   "skills": {
@@ -10,13 +10,13 @@
         "egress": {},
         "scripts": []
       },
-      "commit": "2235be7c60b551f5de82ade908fd3816455afcda",
-      "commitDate": "2026-06-09T19:33:41Z",
-      "contentDigest": "sha256:e6cfd86e419a2b8239e94ba025b0fba0c7d199c4560c678d2b72d3098153cb18",
+      "commit": "41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f",
+      "commitDate": "2026-09-03T16:37:13Z",
+      "contentDigest": "sha256:d43ace63d22e3502ab5c53b63138dafd0431ed5fd2fa63320285c8167ab27de6",
       "firstPinnedAt": "2026-09-22T12:12:58+00:00",
       "name": "frontend-design",
       "path": "skills/frontend-design",
-      "pinnedAt": "2026-09-22T12:12:58+00:00",
+      "pinnedAt": "2026-10-12T16:23:08+00:00",
       "ref": "main",
       "repo": "anthropics/skills",
       "scanSlug": "anthropics/skills/frontend-design",
@@ -42,7 +42,7 @@
           "verdict": "pass"
         }
       },
-      "treeSha": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296"
+      "treeSha": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6"
     },
     "cursor/plugins/cursor-team-kit/skills/thermo-nuclear-code-quality-review": {
       "capabilities": {
