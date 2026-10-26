@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-23T09:01:00+00:00",
+  "generatedAt": "2026-10-26T13:47:07+00:00",
   "held": {},
   "lockfileVersion": 1,
   "skills": {
@@ -10,13 +10,13 @@
         "egress": {},
         "scripts": []
       },
-      "commit": "2235be7c60b551f5de82ade908fd3816455afcda",
-      "commitDate": "2026-06-09T19:33:41Z",
-      "contentDigest": "sha256:e6cfd86e419a2b8239e94ba025b0fba0c7d199c4560c678d2b72d3098153cb18",
+      "commit": "41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f",
+      "commitDate": "2026-09-03T16:37:13Z",
+      "contentDigest": "sha256:d43ace63d22e3502ab5c53b63138dafd0431ed5fd2fa63320285c8167ab27de6",
       "firstPinnedAt": "2026-09-22T12:12:58+00:00",
       "name": "frontend-design",
       "path": "skills/frontend-design",
-      "pinnedAt": "2026-09-22T12:12:58+00:00",
+      "pinnedAt": "2026-10-26T13:47:07+00:00",
       "ref": "main",
       "repo": "anthropics/skills",
       "scanSlug": "anthropics/skills/frontend-design",
@@ -42,7 +42,7 @@
           "verdict": "pass"
         }
       },
-      "treeSha": "0d5b74a14bdf3ebcd64f352d06376a2ef05ed296"
+      "treeSha": "d79e2a5bb4df4a386c2adcdd9ab8709bba28c3f6"
     },
     "cursor/plugins/cursor-team-kit/skills/thermo-nuclear-code-quality-review": {
       "capabilities": {
@@ -215,39 +215,39 @@
         "egress": {},
         "scripts": []
       },
-      "commit": "5c89081d4bbeb3d039a42093653f90bb698d780e",
-      "commitDate": "2026-08-19T13:01:26Z",
-      "contentDigest": "sha256:b24ded80f67b626ba05a182655c9e68d19dc1c8443450eda0b14e1438b7bf392",
+      "commit": "d80fa0f4ebe0c5714af0adf8670336065233ecc6",
+      "commitDate": "2026-09-17T08:29:58Z",
+      "contentDigest": "sha256:e69b700eb9cfed4a7d3080ab645dfc80d14de3570c106433b4b473bf14e56c82",
       "firstPinnedAt": "2026-09-23T09:00:59+00:00",
       "name": "setup-matt-pocock-skills",
       "path": "skills/engineering/setup-matt-pocock-skills",
-      "pinnedAt": "2026-09-23T09:00:59+00:00",
+      "pinnedAt": "2026-10-26T13:47:03+00:00",
       "ref": "main",
       "repo": "mattpocock/skills",
       "scanSlug": "mattpocock/skills/setup-matt-pocock-skills",
       "scans": {
         "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "analyzed": "Oct 7, 2026, 07:00 PM",
           "risk": "none",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/agent-trust-hub",
           "verdict": "pass"
         },
         "snyk": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "analyzed": "Oct 7, 2026, 06:59 PM",
           "risk": "low",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/snyk",
           "verdict": "pass"
         },
         "socket": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "analyzed": "Oct 7, 2026, 07:00 PM",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/setup-matt-pocock-skills/security/socket",
           "verdict": "pass"
         }
       },
-      "treeSha": "ec07f82df54064d01aa1648670e81da41e2cbdc2"
+      "treeSha": "b1568cde855a189b16e5d7dd8a0fa4c3f156bc2e"
     },
     "mattpocock/skills/skills/engineering/tdd": {
       "capabilities": {
@@ -256,39 +256,39 @@
         "egress": {},
         "scripts": []
       },
-      "commit": "321658273cb1d20b76026717d027d505790106d4",
-      "commitDate": "2026-08-19T10:03:37Z",
-      "contentDigest": "sha256:54e51060ae5a774b3f82d887e5faf881c96c9b07e42047559412338f2a1eecba",
+      "commit": "d80fa0f4ebe0c5714af0adf8670336065233ecc6",
+      "commitDate": "2026-09-17T08:29:58Z",
+      "contentDigest": "sha256:4ef0fa42750831ec8fa08ec423df239f0077aa50d0cd89c141ee6fcac3c5c299",
       "firstPinnedAt": "2026-09-22T12:12:56+00:00",
       "name": "tdd",
       "path": "skills/engineering/tdd",
-      "pinnedAt": "2026-09-22T12:12:56+00:00",
+      "pinnedAt": "2026-10-26T13:47:05+00:00",
       "ref": "main",
       "repo": "mattpocock/skills",
       "scanSlug": "mattpocock/skills/tdd",
       "scans": {
         "agent-trust-hub": {
-          "analyzed": "Sep 14, 2026, 06:54 PM",
+          "analyzed": "Oct 7, 2026, 06:58 PM",
           "risk": "none",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/tdd/security/agent-trust-hub",
           "verdict": "pass"
         },
         "snyk": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "analyzed": "Oct 7, 2026, 06:58 PM",
           "risk": "low",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/tdd/security/snyk",
           "verdict": "pass"
         },
         "socket": {
-          "analyzed": "Sep 14, 2026, 06:53 PM",
+          "analyzed": "Oct 7, 2026, 06:58 PM",
           "status": "ok",
           "url": "https://www.skills.sh/mattpocock/skills/tdd/security/socket",
           "verdict": "pass"
         }
       },
-      "treeSha": "79288be15c67b849f22b6572056601090fd20913"
+      "treeSha": "bf1bf5ffcd63aa8abce830f2955a853c121fb463"
     },
     "mattpocock/skills/skills/productivity/grill-me": {
       "capabilities": {
